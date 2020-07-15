@@ -5,5 +5,11 @@
 .RData
 .Ruserdata
 
-# Ignore folders
+# Admin to ignore
 drafts
+
+# C-HARM data to ignore
+data/charm/raw
+data/charm/processed/
+data/charm/processed/charm_nowcast_dataframe.Rds
+data/charm/processed/charm_pn_nowcast_dataframe.Rds

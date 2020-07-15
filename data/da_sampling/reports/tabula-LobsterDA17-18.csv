@@ -1,0 +1,17 @@
+PORT,AREA,"SAMPLECOLLECTIONDATE(S)","NUMBEROFSAMPLES","RESULTS - RANGE(FDA ACTIONLEVEL - > 20 PPM)","AVERAGELEVEL  (FDAACTION LEVEL -> 20 PPM)","PERCENT OFSAMPLESEXCEEDINGACTION LEVEL"
+Ventura,Port Hueneme (Block 664),11/14/2017,1,3.5 ppm,3.5 ppm,0%
+"Ventura /Anacapa Island",Block 684,10/26/2017,6,< 2.5 - 8.4 ppm,2 ppm,0%
+"Ventura /Santa Cruz Island",Block 685,9/29/2017,4,2.9 - 730.0 ppm,226.6 ppm,50%
+"",Block 685,10/25/2017,7,< 2.5 - 89 ppm,42.1 ppm,71%
+"",Block 685,11/02/2017,6,< 2.5 - 140.0 ppm,52.7 ppm,50%
+"",Block 685,11/27/2017,6,< 2.5 - 21 ppm,4.0 ppm,17%
+"",Block 685,12/09/2017,6,< 2.5 - 11 ppm,1.8 ppm,0%
+"",Block 685,12/19/2017,6,6.2 - 37 ppm,17.6 ppm,33%
+"",Block 685,01/02/2018,6,Non-detectable,Non-detectable,0%
+"",Block 685,01/08/2018,6,< 2.5 - 19 ppm,5.2 ppm,0%
+"",Block 708,11/03/2017,6,< 2.5 - 110.0 ppm,29.1 ppm,50%
+"",Block 708,11/30/2017,6,< 2.5 - 21.0 ppm,4.0 ppm,17%
+"",Block 708,12/13/2017,6,< 2.5 - 4.4 ppm,1.8 ppm,0%
+"",Block 708,12/21/2017,6,< 2.5 - 2.9 ppm,0.5 ppm,0%
+"",Block 709,11/14/2017,3,< 2.5 - 18 ppm,6.0 ppm,0%
+San Diego,Scripps Pier  (Block 842),9/29/2017,6,Non-detectable,Non-detectable,0%

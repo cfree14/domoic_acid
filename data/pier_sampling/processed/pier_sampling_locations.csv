@@ -1,0 +1,47 @@
+"n2s","region","county","long_name","other_name","type","number","long_dd","lat_dd"
+1,"Northern","Del Norte","Wilson Creek",NA,"percent composition",NA,-117.044756,33.54718
+2,"Northern","Humboldt","Trinidad Pier",NA,"percent composition",NA,-124.1475224,41.0564498
+3,"Northern","Humboldt","Humboldt Bay",NA,"percent composition",5,-124.242601,40.7195153
+4,"Northern","Sonoma","Bodega Harbor, USCG Dock",NA,"percent composition",NA,-123.0516433,38.3119704
+5,"Northern","Sonoma","Tomales Bay",NA,"percent composition",4,-122.9127726,38.1712779
+6,"Northern","Marin","Drakes Bay, Chimney Rock",NA,"percent composition",NA,-122.8817367,38.0722847
+7,"Northern","Marin","Bolinas Lagoon",NA,"percent composition",NA,-122.6800131,37.9209706
+8,"Northern","Contra Costa","Ferry Point, Richmond, CA",NA,"percent composition",NA,-122.3842048,37.9140359
+9,"Northern","Marin","Fort Baker, Caballo Point",NA,"percent composition",NA,-122.4793772,37.8376611
+10,"Northern","San Francisco","SF Presidio Pier",NA,"percent composition",NA,-122.4698552,37.8093003
+11,"Northern","San Francisco","Pier 15, San Francisco",NA,"percent composition",NA,-122.397348,37.8016649
+12,"Northern","Alameda","Port View Park",NA,"percent composition",NA,-122.3332487,37.8055566
+13,"Northern","San Mateo","Pacifica Pier",NA,"percent composition",NA,-122.4962497,37.6333681
+14,"Northern","San Mateo","Pillar Pt. Harbor",NA,"percent composition",NA,-122.4822928,37.5030218
+15,"Northern","Santa Cruz","Santa Cruz Wharf",NA,"continuous",NA,-122.0172773,36.9572769
+16,"Northern","Santa Cruz","Capitola Pier",NA,"percent composition",NA,-121.95329,36.969305
+17,"Northern","Santa Cruz","Santa Cruz Offshore",NA,"percent composition",NA,-121.9980643,36.968724
+18,"Northern","Monterey","Fisherman's Wharf, Monterey","Commercial Wharf","continuous",NA,-121.8931123,36.6039005
+19,"Northern","Monterey","Stillwater Cove",NA,"percent composition",NA,-123.2903804,38.5388378
+20,"Southern","San Luis Obispo","San Simeon Pier",NA,"percent composition",NA,-121.188073,35.6409716
+21,"Southern","San Luis Obispo","Cayucos Pier",NA,"percent composition",NA,-120.9066909,35.448145
+22,"Southern","San Luis Obispo","Morro Bay",NA,"percent composition",3,-120.8499924,35.3659445
+23,"Southern","San Luis Obispo","Diablo Cove",NA,"percent composition",NA,NA,NA
+24,"Southern","San Luis Obispo","Cal Poly Pier",NA,"continuous",NA,-120.7415426,35.1752666
+25,"Southern","San Luis Obispo","Pismo Pier",NA,"percent composition",NA,-120.6447315,35.1382871
+26,"Southern","Santa Barbara","Naples Point, Santa Barbara",NA,"percent composition",NA,-119.9518202,34.4345227
+27,"Southern","Santa Barbara","Goleta Pier",NA,"continuous",NA,-119.8288248,34.4144809
+28,"Southern","Santa Barbara","Stearns Wharf",NA,"continuous",NA,-119.6855856,34.4099807
+29,"Southern","Santa Barbara","Mohawk Reef",NA,"percent composition",NA,NA,NA
+30,"Southern","Ventura","Ventura Pier",NA,"percent composition",NA,-119.2909616,34.2750672
+31,"Southern","Los Angeles","Santa Monica Pier",NA,"continuous",NA,-118.4961748,34.0103237
+32,"Southern","Los Angeles","Santa Monica Bay",NA,"percent composition",3,-118.504167,33.938889
+33,"Southern","Los Angeles","Rocky Point",NA,"percent composition",NA,-113.5311843,31.3268218
+34,"Southern","Los Angeles","Belmont Pier",NA,"percent composition",NA,-118.1481285,33.7578881
+35,"Southern","Los Angeles","L.A. Harbour Breakwater",NA,"percent composition",NA,-118.251604,33.7085639
+36,"Southern","Orange","Bolsa Chica",NA,"percent composition",NA,-118.0487973,33.6955698
+37,"Southern","Orange","Catalina Island",NA,"percent composition",NA,-118.4163103,33.3878856
+38,"Southern","Orange","Newport Bay, Back Bay",NA,"percent composition",NA,-117.8841707,33.6284957
+39,"Southern","Orange","Newport Pier",NA,"continuous",NA,-117.9288133,33.6074608
+40,"Southern","Orange","Crystal Cove Beach",NA,"percent composition",NA,-117.8405407,33.5741359
+41,"Southern","Orange","San Clemente Pier",NA,"percent composition",NA,-117.6197279,33.4196571
+42,"Southern","San Diego","Agua Hedionda Lagoon",NA,"percent composition",NA,-117.3075496,33.1398426
+43,"Southern","San Diego","La Jolla, Offshore",NA,"percent composition",NA,-117.2392433,32.7590976
+44,"Southern","San Diego","La Jolla, Scripp's Pier",NA,"continuous",NA,-117.2545644,32.8634499
+45,"Southern","San Diego","San Diego Harbor",NA,"percent composition",NA,-117.1441227,32.6716639
+46,"Southern","San Diego","Imperial Beach Pier",NA,"percent composition",NA,-117.1349125,32.5795515

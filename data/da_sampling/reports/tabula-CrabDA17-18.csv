@@ -1,0 +1,47 @@
+PORT,AREA,"SAMPLECOLLECTIONDATE(S)",CRAB TYPE,"NUMBEROFSAMPLES","RESULTS - RANGE(FDA ACTIONLEVEL - > 30 PPM)","AVERAGELEVEL  (FDAACTION LEVEL -> 30 PPM)","PERCENT OFSAMPLESEXCEEDINGACTION LEVEL"
+Crescent City,George Reef,9/28/2017,Dungeness,6,< 2.5 - 33 ppm,12.1 ppm,17%
+"",Klamath River,9/28/2017,Dungeness,6,7.5 - 18 ppm,14 ppm,0%
+"",George Reef,10/13/2017,Dungeness,6,6.6 - 60 ppm,34.9 ppm,50%
+"",George Reef,10/25/2017,Dungeness,6,8.1 - 71 ppm,32.2 ppm,50%
+"",George Reef,11/01/2017,Dungeness,6,11 - 50 ppm,27.3 ppm,50%
+"",George Reef,11/11/2017,Dungeness,6,12 - 65 ppm,24.5 ppm,17%
+"",George Reef,11/18/2017,Dungeness,6,8.0 - 51 ppm,21.7 ppm,17%
+"",George Reef,11/25/2017,Dungeness,6,19 - 98 ppm,52.2 ppm,83%
+"",George Reef,12/05/2017,Dungeness,6,16 - 56 ppm,33.0 ppm,50%
+"",George Reef,12/12/2017,Dungeness,6,4.2 - 24 ppm,10.8 ppm,0%
+"",George Reef,12/19/2017,Dungeness,6,< 2.5 - 7.9 ppm,4.7 ppm,0%
+Trinidad,Trinidad North,9/29/2017,Dungeness,6,< 2.5 - 13 ppm,7.2 ppm,0%
+"",Trinidad South,9/29/2017,Dungeness,6,< 2.5 - 19 ppm,8.7 ppm,0%
+Eureka,Eureka North,9/29/2017,Dungeness,6,3.7 - 12 ppm,7.2 ppm,0%
+"",Eel River,9/29/2017,Dungeness,6,< 2.5 - 44 ppm,12.2 ppm,17%
+"",Eel River,10/18/2017,Dungeness,6,3.8 - 31 ppm,14.7 ppm,17%
+"",Eel River,10/26/2017,Dungeness,6,6.8 - 28 ppm,15.2 ppm,0%
+"",Eel River,11/01/2017,Dungeness,6,5.1 - 13 ppm,8.9 ppm,0%
+Fort Bragg,Usal,10/8/2017,Dungeness,6,< 2.5 - 110 ppm,46.5 ppm,33%
+"",Point Arena,10/15/2017,Dungeness,6,< 2.5 - 15 ppm,7.6 ppm,0%
+"",Usal,10/24/2017,Dungeness,6,6.2 - 69 ppm,24.0 ppm,17%
+"",Usal,11/01/2017,Dungeness,6,5.2 - 150 ppm,39.4 ppm,17%
+"",Usal,11/18/2017,Dungeness,6,2.8 - 31 ppm,13.6 ppm,17%
+"",Usal,12/04/2017,Dungeness,6,< 2.5 - 6.8 ppm,2.3 ppm,0%
+"",Usal,12/11/2017,Dungeness,6,3.3 - 12 ppm,6.4 ppm,0%
+"",King Range,04/03/2018,Rock,6,< 2.5 - 5.7 ppm,1.0 ppm,0%
+"",Ten Mile Beach,04/04/2018,Rock,6,< 2.5 - 3.3 ppm,1.1 ppm,0%
+Bodega Bay,Russian River,7/23/2017,Rock,6,< 2.5 - 18 ppm,6 ppm,0%
+"",Salt Point,7/23/2017,Rock,4,Non-detectable,Non-detectable,0%
+"",Russian River,8/8/2017,Rock,5,< 2.5 - 50 ppm,10 ppm,20%
+"",Salt Point,8/8/2017,Rock,5,< 2.5 - 2.7 ppm,0.5 ppm,0%
+"",Russian River,9/12/2017,Rock,6,< 2.5 - 9.2 ppm,3.9 ppm,0%
+"",Salt Point,9/12/2017,Rock,6,< 2.5 - 7.1 ppm,3.7 ppm,0%
+"",Bodega Head,9/17/2017,Dungeness,6,< 2.5 - 15 ppm,7.5 ppm,0%
+"",Point Reyes,9/24/2017,Dungeness,6,< 2.5 - 21 ppm,6.9 ppm,0%
+"",Salt Point,9/24/2017,Dungeness,6,< 2.5 - 5.1 ppm,1.4 ppm,0%
+"",Russian River,9/24/2017,Dungeness,6,< 2.5 - 17 ppm,2.8 ppm,0%
+"",Russian River,12/20/2017,Rock,6,< 2.5 - 7.4 ppm,1.2 ppm,0%
+"",Russian River,12/28/2017,Rock,6,< 2.5 - 14 ppm,3.3 ppm,0%
+"",Black Point,3/7/2018,Rock,6,< 2.5 - 12 ppm,2.5 ppm,0%
+Half Moon Bay/SF,Pigeon Point,9/29/2017,Dungeness,6,< 2.5 - 8.7 ppm,2.9 ppm,0%
+"",Pillar Point,9/29/2017,Dungeness,6,< 2.5 - 8.5 ppm,1.4 ppm,0%
+"",San Francisco,9/30/2017,Dungeness,6,< 2.5 - 12 ppm,3.0 ppm,0%
+Monterey,Monterey Bay,9/23/2017,Dungeness,6,< 2.5 - 24 ppm,4.5 ppm,0%
+Morro Bay,Avila Beach,10/8/2017,Dungeness,6,< 2.5 - 5.3 ppm,2.7 ppm,0%
+"Santa Barbara /Channel Islands","Santa RosaIsland",9/27/2017,Rock,5,2.7 - 8.1 ppm,5.9 ppm,0%

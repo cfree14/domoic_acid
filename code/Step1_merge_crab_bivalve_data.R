@@ -10,18 +10,16 @@ library(sf)
 library(tidyverse)
 library(lubridate)
 
-# External directories
-indir <- "/Users/cfree/Dropbox/Chris/UCSB/projects/dungeness/data/da_sampling/2020_request/processed"
-charmdir <- "/Users/cfree/Dropbox/Chris/UCSB/projects/dungeness/data/charm/processed"
-
-# Internal directories
+# Directories
 outdir <- "data"
+charmdir <- "data/charm/processed"
+sampledir <- "data/da_sampling/2020_request/processed"
 tabledir <- "tables"
 plotdir <- "figures"
 
 # Read data
-crabs_orig <- readRDS(file.path(indir, "CDPH_crab_viscera_da_data.rds"))
-bivalves_orig <- readRDS(file.path(indir, "CDPH_mollusc_viscera_da_data.rds"))
+crabs_orig <- readRDS(file.path(sampledir, "CDPH_crab_viscera_da_data.rds"))
+bivalves_orig <- readRDS(file.path(sampledir, "CDPH_mollusc_viscera_da_data.rds"))
 
 
 # Merge data
