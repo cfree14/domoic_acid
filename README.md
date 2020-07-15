@@ -1,4 +1,4 @@
-# Predicting domoic acid contamination in California seafood species
+### Predicting domoic acid contamination in California seafood species
 
 This is the GitHub repository for a project seeking to predict domoic acid contamination in California fisheries and aquaculture species.
 
