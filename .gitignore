@@ -1,0 +1,9 @@
+
+# Ignore files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Ignore folders
+drafts
