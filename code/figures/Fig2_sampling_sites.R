@@ -12,9 +12,9 @@ library(tidyverse)
 library(lubridate)
 
 # Directories
-datadir <- "models/contamination/paper/data"
-tabledir <- "models/contamination/paper/tables"
-plotdir <- "models/contamination/paper/figures"
+datadir <- "input"
+tabledir <- "tables"
+plotdir <- "figures"
 
 # Study species
 study_species <- c("Dungeness crab",
@@ -79,7 +79,16 @@ biv_sites <- data %>%
   # Summarize
   group_by(comm_name, site) %>% 
   summarize(lat_dd=mean(lat_dd),
-            long_dd=mean(long_dd))
+            long_dd=mean(long_dd)) %>% 
+  ungroup() %>% 
+  # Add name hjust for plotting
+  mutate(hjust=-0.1,
+         hjust=ifelse(site=="Agua Hedionda Lagoon	", 1.1, hjust), 
+         hjust=ifelse(site=="Tomales Bay" & comm_name=="Sea mussel", 1.1, hjust),
+         site_label=recode(site, 
+                           "Humboldt beaches"="Clam Beach and others",
+                           "Crescent City"="Crescent Beach"))
+         # site_label=ifelse(comm_name=="Sea mussel" & site=="Tomales Bay", "Tomales\nBay", site_label))
 
 # Export bivalve sites
 write.csv(biv_sites, file=file.path(datadir, "bivalve_sampling_sites.csv"), row.names=F)
@@ -92,6 +101,22 @@ n_key <- data %>%
 
 # Plot data
 ################################################################################
+
+# Bonus razor clam sites
+biv_sites_extra <- tibble(comm_name="Razor clam",
+                          site="Dillon Beach",
+                          lat_dd=38.250833, 
+                          long_dd=-122.965278)
+
+# Build distribution breaks key
+# Razor clam: North of Pismo Beach - 35.148333
+# Dungeness crab: North of Point Conception - 34.448113
+# Spiny lobster: South of Monterey Bay (North) - 36.9596007
+dist_breaks_key <- tibble(comm_name=c("Dungeness crab", "Spiny lobster", "Razor clam"),
+                          break_name=c("Point Conception", "Monterey Bay", "Pismo Beach"),
+                          break_lat_dd=c(34.448113, 36.9596007, 35.148333),
+                          vjust=c(-0.3, 1.3, -0.3)) %>% 
+  mutate(comm_name=factor(comm_name, levels=study_species))
 
 # Setup theme
 my_theme <- theme(axis.text=element_blank(),
@@ -117,11 +142,16 @@ g <- ggplot() +
   # Plot CA/Mexico
   geom_sf(data=usa, fill="grey85", col="white", size=0.2) +
   geom_sf(data=mexico, fill="grey85", col="white", size=0.2) +
+  # Plot range breaks
+  geom_hline(data=dist_breaks_key, mapping=aes(yintercept=break_lat_dd), lwd=0.25, linetype="solid") +
+  geom_text(data=dist_breaks_key, mapping=aes(x=-125.3, y=break_lat_dd, label=break_name, vjust=vjust), hjust=0, size=2) +
   # Plot samples
   geom_point(data=data, mapping=aes(x=long_dd, y=lat_dd, color=type), size=1) +
   facet_wrap(~comm_name, ncol=4) +
   # Label sites
-  geom_text(data=biv_sites, mapping=aes(x=long_dd, y=lat_dd, label=site), hjust=-0.1, size=1.7) +
+  geom_text(data=biv_sites, mapping=aes(x=long_dd, y=lat_dd, label=site_label, hjust=hjust), size=1.7) +
+  # Label extra sites
+  # geom_text(data=biv_sites_extra, mapping=aes(x=long_dd, y=lat_dd, label=site), hjust=-0.1, size=1.7) +
   # Add sample size
   geom_text(data=n_key, mapping=aes(label=n_label), x=-116, y=41.5, hjust=1, size=3) +
   # Crop extent
@@ -135,7 +165,7 @@ g <- ggplot() +
 g
 
 # Export plot
-ggsave(g, filename=file.path(plotdir, "Fig2_sample_maps.png"), 
+ggsave(g, filename=file.path(plotdir, "Fig2_sample_maps.png"),
        width=6.5, height=5, units="in", dpi=600)
 
 

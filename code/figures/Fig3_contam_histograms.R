@@ -1,6 +1,4 @@
 
-
-
 # Clear workspace
 rm(list = ls())
 
@@ -13,9 +11,9 @@ library(tidyverse)
 library(lubridate)
 
 # Directories
-datadir <- "models/contamination/paper/data"
-tabledir <- "models/contamination/paper/tables"
-plotdir <- "models/contamination/paper/figures"
+datadir <- "input"
+tabledir <- "tables"
+plotdir <- "figures"
 
 # Study species
 study_species <- c("Dungeness crab",

@@ -13,15 +13,18 @@ library(rnaturalearth)
 library(cowplot)
 
 # Plotting directory
-plotdir <- "models/contamination/paper/figures"
+plotdir <- "figures"
 
-# Data directories
-landingsdir <- "data/cdfw/landings_public/processed"
+# Internal data directories
 charmdir <- "data/charm/processed"
 pierdir <- "data/pier_sampling/processed"
-gisdir <- "data/cdfw/gis_data/processed"
 dasurvdir <- "data/da_sampling/2019_request/processed"
-dasurvdir1 <- "data/da_sampling/2019_request/raw"
+dasurvdir1 <- "data/da_sampling"
+
+# External data directories
+gisdir <- "/Users/cfree/Dropbox/Chris/UCSB/projects/dungeness/data/cdfw/gis_data/processed"
+landingsdir <- "/Users/cfree/Dropbox/Chris/UCSB/projects/dungeness/data/cdfw/landings_public/processed"
+
 
 # Date to plot
 date <- "2015-07-01"
@@ -52,6 +55,8 @@ piers <- read.csv(file.path(pierdir, "pier_sampling_locations.csv"), as.is=T) %>
   mutate(type=recode_factor(type,
                             "continuous"="Quantitative",
                             "percent composition"="Qualitative"))
+table(piers$type)
+
 q_piers <- piers %>% 
   filter(type=="Quantitative") %>% 
   mutate(label_name=plyr::revalue(long_name, c("La Jolla, Scripp's Pier"="Scripps Pier",
@@ -70,7 +75,7 @@ da_sites <- import(file.path(dasurvdir1, "2014_crab_da_sampling_sites.xlsx")) %>
   mutate(long_dd=long_dd*-1)
 
 # Read bivalve sampling data
-da_bivs <- read.csv(file.path("models/contamination/paper/data/bivalve_sampling_sites.csv"), as.is=T) %>% 
+da_bivs <- read.csv(file.path("input/bivalve_sampling_sites.csv"), as.is=T) %>% 
   mutate(comm_name=recode(comm_name, 
                           "Pacific oyster"="PO",
                           "Sea mussel"="SM",
@@ -88,7 +93,7 @@ mexico <- rnaturalearth::ne_countries(country="Mexico", returnclass = "sf")
 my_theme <- theme(axis.text=element_blank(),
                   axis.title=element_blank(),
                   plot.title=element_text(size=8),
-                  legend.text=element_text(size=5),
+                  legend.text=element_text(size=7),
                   legend.title=element_text(size=7),
                   legend.position = "bottom",
                   legend.spacing.y = unit(0.05, "cm"),
@@ -110,11 +115,11 @@ g1 <- ggplot() +
   geom_sf(data=usa, fill="grey85", col="white", size=0.2) +
   geom_sf(data=mexico, fill="grey85", col="white", size=0.2) +
   # Add piers and legend
-  geom_point(data=arrange(piers, desc(type)), aes(x=long_dd, y=lat_dd, col=type), size=0.8) +
+  geom_point(data=arrange(piers, desc(type)), aes(x=long_dd, y=lat_dd, col=type), size=1) +
   # ggrepel::geom_text_repel(data=q_piers, aes(x=long_dd, y=lat_dd, label=label_name),
   #                          size=1.6, direction = "y", hjust = 0, nudge_x=0.10, segment.size=0.2) +
   geom_text(data=q_piers, aes(x=long_dd, y=lat_dd, label=label_name),
-            size=1.6, hjust=c(-0.13, -0.13, -0.13, 1.13, -0.13,-0.13, -0.13, -0.13)) +
+            size=1.7, hjust=c(-0.13, -0.13, -0.13, 1.13, -0.13,-0.13, -0.13, -0.13)) +
   scale_color_manual(name="Monitoring type", values=c("black", "grey40")) +
   # Raster legend
   scale_fill_gradientn(#name="p(PN ≥10^4 cells/ml)",
@@ -144,12 +149,12 @@ g2 <- ggplot() +
   geom_sf(data=mexico, fill="grey85", col="white", size=0.2) +
   # Add sampling areas and legend
   geom_point(data=da_sites, aes(x=long_dd, y=lat_dd), size=0.5, shape=4) +
-  geom_point(data=da_ports, aes(x=long_dd, y=lat_dd, col=da_sampling), size=0.8) +
+  geom_point(data=da_ports, aes(x=long_dd, y=lat_dd, col=da_sampling), size=1) +
   scale_color_manual(name="Monitoring type", values=c("black", "grey40")) +
   # ggrepel::geom_text_repel(data=filter(da_ports, da_sampling=="routine"), aes(x=long_dd, y=lat_dd, label=port),
   #                          size=1.6, direction = "y", hjust = 0, nudge_x=0.10, segment.size=0.2) +
   geom_text(data=filter(da_ports, da_sampling=="Routine"), aes(x=long_dd, y=lat_dd, label=port),
-            size=1.6, hjust=-0.13) +
+            size=1.7, hjust=-0.13) +
   # Raster legend
   scale_fill_gradientn(name="p(pDA ≥500 ng/l)",
                        colors=rev(RColorBrewer::brewer.pal(9, "RdYlBu")),
@@ -175,7 +180,8 @@ g3 <- ggplot() +
   geom_sf(data=usa, fill="grey85", col="white", size=0.2) +
   geom_sf(data=mexico, fill="grey85", col="white", size=0.2) +
   # Add sampling areas and legend
-  geom_point(data=da_bivs, aes(x=long_dd, y=lat_dd, color=comm_name), size=0.8) +
+  geom_point(data=da_bivs, aes(x=long_dd, y=lat_dd, color=comm_name), size=1.2) +
+  geom_point(data=da_bivs, aes(x=long_dd, y=lat_dd), size=1.4, color="black", shape=21, stroke=0.3) + # add outline to shape, has to be bigger
   scale_color_discrete(name="Species") +
   # Raster legend
   scale_fill_gradientn(name="p(cDA ≥10 pg/cell)",

@@ -27,7 +27,7 @@ split_data <- function(data, ptrain){
   sampleids_under_test <- sample(sampleids_under, 0.2*length(sampleids_under))
   data1 <- data1 %>% 
     mutate(dataset=ifelse(sampleid %in% c(sampleids_over_test, sampleids_under_test), "test", "train")) %>% 
-    select(dataset, everything())
+    dplyr::select(dataset, everything())
   
   # Inspect sample size in each dataset
   stats <- data1 %>% 

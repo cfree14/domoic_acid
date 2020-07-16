@@ -3,7 +3,7 @@ fit_rf <- function(data, variable){
   
   # Reduce data
   data1 <- data %>% 
-    select(over, contains(variable))
+    dplyr::select(over, contains(variable))
   
   # Define tuning parameter grid
   # mtry = Number of variables randomly sampled as candidate variables

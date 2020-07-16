@@ -23,7 +23,7 @@ build_data <- function(species, predictor, lag, action_ppm){
     # Sample coordinates
     xy <- sdata %>% 
       filter(sampleid==x) %>% 
-      select(long_dd_use, lat_dd_use) %>% 
+      dplyr::select(long_dd_use, lat_dd_use) %>% 
       as.matrix()
     
     # Extract DAP for sample up to X days before sample date
@@ -31,7 +31,7 @@ build_data <- function(species, predictor, lag, action_ppm){
       gather(key="date", value="dap_risk", 2:ncol(.)) %>% 
       mutate(sampleid=x,
              date=ymd(gsub("X", "", date))) %>% 
-      select(sampleid, date, dap_risk) %>% 
+      dplyr::select(sampleid, date, dap_risk) %>% 
       # Reduce to days before sample date
       filter(date<=sample_date & date>=first_date)
     
@@ -40,7 +40,7 @@ build_data <- function(species, predictor, lag, action_ppm){
       gather(key="date", value="dac_risk", 2:ncol(.)) %>% 
       mutate(sampleid=x,
              date=ymd(gsub("X", "", date))) %>% 
-      select(sampleid, date, dac_risk) %>% 
+      dplyr::select(sampleid, date, dac_risk) %>% 
       # Reduce to days before sample date
       filter(date<=sample_date & date>=first_date)
     
@@ -61,19 +61,19 @@ build_data <- function(species, predictor, lag, action_ppm){
     # Record lag
     group_by(sampleid) %>% 
     mutate(day=n():1-1) %>% 
-    select(-date) %>% 
+    dplyr::select(-date) %>% 
     # Convert to long
-    select(sampleid, day, everything()) %>% 
+    dplyr::select(sampleid, day, everything()) %>% 
     gather(key="variable", value="risk", 3:4) %>% 
     mutate(variable=recode(variable, 
                            "dap_risk"="pda",
                            "dac_risk"="cda")) %>% 
     mutate(predictor=paste(variable, day, sep="")) %>% 
-    select(-c(variable, day)) %>% 
+    dplyr::select(-c(variable, day)) %>% 
     # Convert to wide
     spread(key="predictor", value="risk") %>% 
     # Arrange columns
-    select(sampleid, paste0("pda", 0:30), paste0("cda", 0:30))
+    dplyr::select(sampleid, paste0("pda", 0:30), paste0("cda", 0:30))
     
   # Build results
   results <- sdata %>% 

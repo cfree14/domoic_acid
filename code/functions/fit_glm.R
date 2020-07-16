@@ -2,7 +2,7 @@ fit_glm <- function(data, variable){
   
   # Reduce data
   data1 <- data %>% 
-    select(over, contains(variable))
+    dplyr::select(over, contains(variable))
 
   # Fit model  
   glm_fit <- logistic_reg(mode = "classification") %>%
