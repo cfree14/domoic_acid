@@ -71,6 +71,7 @@ for(i in 1:length(spp_do)){
 #######################################
 
 # Loop through species
+i <- 1
 for(i in 1:length(spp_do)){
   
   # Read data
@@ -78,9 +79,14 @@ for(i in 1:length(spp_do)){
   sdata <- readRDS(file.path(inputdir, infile))
   sdata_train <- sdata[["data_train"]]
   
-  # Fit cDA models
-  glm_cda <- fit_glm(data=sdata_train, variable="cda")
-  outfile_cda <- paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_glm_cda.Rds")
+  # # Fit cDA models
+  # glm_cda <- fit_glm(data=sdata_train, variable="cda")
+  # outfile_cda <- paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_glm_cda.Rds")
+  # saveRDS(glm_cda, file=file.path(outputdir, outfile_cda))
+  
+  # Fit cDA models + latitude
+  glm_cda <- fit_glm(data=sdata_train, variable="cda", lat=T)
+  outfile_cda <- paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_glm_cda_lat.Rds")
   saveRDS(glm_cda, file=file.path(outputdir, outfile_cda))
   
   # Fit pDA models
@@ -94,18 +100,23 @@ for(i in 1:length(spp_do)){
 #######################################
 
 # Loop through species
-# i <- 5
-# for(i in 5:6){
-for(i in 1:length(spp_do)){
+# i <- 1
+for(i in 1:2){
+# for(i in 1:length(spp_do)){
   
   # Read data
   infile <- paste0(tolower(gsub(" ", "_", spp_do[i])), "_data_split.Rds")
   sdata <- readRDS(file.path(inputdir, infile))
   sdata_train <- sdata[["data_train"]]
   
+  # # Fit cDA models
+  # rf_cda <- fit_rf(data=sdata_train, variable="cda")
+  # outfile_cda <- paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_rf_cda.Rds")
+  # saveRDS(rf_cda, file=file.path(outputdir, outfile_cda))
+  
   # Fit cDA models
-  rf_cda <- fit_rf(data=sdata_train, variable="cda")
-  outfile_cda <- paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_rf_cda.Rds")
+  rf_cda <- fit_rf(data=sdata_train, variable="cda", lat=T)
+  outfile_cda <- paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_rf_cda_lat.Rds")
   saveRDS(rf_cda, file=file.path(outputdir, outfile_cda))
   
   # Fit pDA models

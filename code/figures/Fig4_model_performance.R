@@ -11,36 +11,38 @@ library(tidyverse)
 # Directories
 datadir <- "output/model_tests"
 plotdir <- "figures"
+tabledir <- "tables"
+
+# Read data
+data_orig <- read.csv(file.path(tabledir, "TableS1_model_performance_metrics.csv"), as.is=T)
 
 # Build data
 ################################################################################
 
 # Species do
-spp_do <- c("Dungeness crab", "Rock crab", "Spiny lobster", "Razor clam", "Sea mussel", "Bay mussel")
-
-# Build performance metrics data
-######################################
-
-# Loop through species
-x <- spp_do[1]
-data <- purrr::map_df(spp_do, function(x) {
-  
-  # Read data
-  infile <- paste0(tolower(gsub(" ", "_", x)), "_evaluation.Rds")
-  sdata <- readRDS(file.path(datadir, infile))
-  
-  # Performance metrics
-  pmetrics <- sdata$pmetrics %>% 
-    mutate(species=x) %>% 
-    dplyr::select(species, everything())
-  
-})
+spp_do <- c("Dungeness crab", "Rock crab", "Spiny lobster", 
+            "Razor clam", "Sea mussel", "Bay mussel")
 
 # Format data
-data1 <- data %>% 
-  mutate(species=factor(species, levels=spp_do)) %>% 
-  mutate(model_type=gsub(" \\(cDA)| \\(pDA)", "", model),
-         pred_type=ifelse(grepl("cDA", model), "cDA", "pDA"))
+data <- data_orig %>% 
+  # Factor species and model type
+  mutate(species=factor(species, levels=spp_do),
+         model_type=recode(model_type, "Random forest"="Random forests"),
+         model_type=factor(model_type, c("Logistic regression", "Boosted regression trees", "Random forests"))) %>% 
+  # Add labels
+  mutate(kappa_catg=cut(kappa %>% round(., 2), breaks=c(-Inf, 0.2, 0.4, 0.7, 1), labels=c("Poor", "Fair", "Good", "Excellent"), right = F),
+         auc_catg=cut(auc %>% round(., 2), breaks=c(-Inf, 0.7, 0.8, 0.9, 1), labels=c("Poor", "Acceptable", "Excellent", "Outstanding"), right = F),
+         catg_label=paste(kappa_catg, auc_catg, sep=", ")) %>% 
+  # Identify best model
+  mutate(orig_dist=sqrt(kappa^2+auc^2)) %>% 
+  group_by(species) %>% 
+  mutate(best_model=orig_dist==max(orig_dist))
+  
+
+# Specify best
+best_models <- data %>% 
+  filter(best_model)
+  
 
 
 # Build test data sample size/performance data
@@ -95,24 +97,26 @@ my_theme <- theme(axis.text=element_text(size=6),
                   legend.position = "bottom")
 
 # Plot performance metrics scatter plot
-g <- ggplot(data1, aes(x=kappa, y=auc, size=accuracy, color=model_type)) +
+g <- ggplot(data, aes(x=kappa, y=auc, size=accuracy, color=model_type)) +
   # Facet by species
   facet_wrap(~species, ncol=3) +
   # Plot reference lines
-  geom_vline(xintercept = c(0.2, 0.4, 0.7), linetype="dotted", color="grey80", lwd=0.3) + # Cohen's kappa
-  geom_hline(yintercept = c(0.5, 0.7, 0.8, 0.9), linetype="dotted", color="grey80", lwd=0.3) + # AUC
+  geom_vline(xintercept = c(0.2, 0.4, 0.7), linetype="dotted", color="grey80", lwd=0.2) + # Cohen's kappa
+  geom_hline(yintercept = c(0.5, 0.7, 0.8, 0.9), linetype="dotted", color="grey80", lwd=0.2) + # AUC
   # Limits
   scale_y_continuous(breaks=c(0.5, 0.7, 0.8, 0.9, 1), 
-                     labels=c("0.5\nCoin flip", "0.7\nAcceptable", "0.8\nExcellent", "0.9\nOutstanding", "1.0\nPerfect"), lim=c(0.5, 1.0)) +
+                     labels=c("0.5\nPoor", "0.7\nAcceptable", "0.8\nExcellent", "0.9\nOutstanding", "1.0\nPerfect"), lim=c(NA, 1.0)) +
   scale_x_continuous(breaks=c(0, 0.2, 0.4, 0.7, 1), lim=c(NA, 1),
                      labels=c("0.0\nPoor", "0.2\nFair", "0.4\nGood", "0.7\nExcellent", "1.0\nPerfect")) +
   # Plot points
   geom_point() +
+  # Label best models
+  geom_text(data=best_models, mapping=aes(x=kappa+0.05, y=auc, color=model_type, label=catg_label), inherit.aes=F, hjust=0, show.legend=F, size=2) +
   # Labels
   labs(x="Cohen's kappa", y="Area under the curve (AUC)") +
   # Legends
   scale_color_discrete(name="Model") +
-  scale_size_continuous(name="Accuracy") +
+  scale_size_continuous(name="Accuracy", range = c(0.5, 3), breaks=seq(0.75, 0.95, 0.1)) +
   guides(size = guide_legend(title.position="top", title.hjust = 0),
          color = guide_legend(title.position="top", title.hjust = 0)) +
   # Theme

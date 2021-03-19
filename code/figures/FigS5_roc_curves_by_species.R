@@ -70,11 +70,18 @@ stats <- purrr::map_df(spp_do, function(x) {
 
 # Format stats # MAJOR HACK HERE - PREPARE STATS FOR BEST MODEL
 stats_label <- stats %>% 
-  filter(model=="Random forest (cDA)") %>% 
+  # Classify best models
+  mutate(model_type=gsub(" \\(cDA)| \\(pDA)", "", model),
+         best=ifelse((species=="Rock crab" & model_type=="Boosted regression trees") | (species!="Rock crab" & model_type=="Random forest"), T, F)) %>% 
+  filter(best) %>% 
+  # Format species
   mutate(species=factor(species, levels=spp_do)) %>% 
+  # Build label
   mutate(label=paste0(n, " ", true, " (", round(pcorrect*100, 1), "% correct)")) %>% 
+  # Arrange
   arrange(species, desc(true)) %>% 
-  group_by(species) %>% 
+  # Collapse label
+  group_by(species, model_type) %>% 
   summarize(label_combo=paste(label, collapse="\n"))
 
 # Plot data
@@ -102,7 +109,7 @@ g <- ggplot(data1, aes(x=fpr, y=tpr, color=model_type)) +
   # Labels
   labs(x="False positive rate (1-specificity)", y="True positive rate (sensitivity)") +
   # Sample size
-  geom_text(stats_label, inherit.aes=F, mapping=aes(x=1, y=0.05, label=label_combo), size=2, col="grey40", hjust=1) +
+  geom_text(data=stats_label, inherit.aes=F, mapping=aes(x=1, y=0.05, label=label_combo, color=model_type), size=2,  hjust=1, show.legend = FALSE) +
   # Legend
   scale_color_discrete(name="Model") +
 #guides(color = guide_legend(title.position="top", title.hjust = 0)) +

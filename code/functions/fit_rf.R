@@ -1,9 +1,15 @@
 
-fit_rf <- function(data, variable){
+fit_rf <- function(data, variable, lat=F){
   
   # Reduce data
   data1 <- data %>% 
     dplyr::select(over, contains(variable))
+  
+  # Remove latitude if not including
+  if(lat==F){
+    data1 <- data1 %>% 
+      dplyr::select(-lat_dd)
+  }
   
   # Define tuning parameter grid
   # mtry = Number of variables randomly sampled as candidate variables

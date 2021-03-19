@@ -31,7 +31,7 @@ spp_do <- c("Dungeness crab", "Rock crab", "Spiny lobster",
 ################################################################################
 
 # Loop through species
-i <- 1
+i <- 2
 for(i in 1:length(spp_do)){
   
   # Read test data
@@ -41,15 +41,16 @@ for(i in 1:length(spp_do)){
   sdata_test <- sdata[["data_test"]]
   
   # Read models
-  model_names <- c("Logistic regression (cDA)", "Random forest (cDA)") #, "Boosted regression trees (cDA)")
+  model_names <- c("Logistic regression (cDA)", "Random forest (cDA)",  "Boosted regression trees (cDA)")
   
   # Read models
   glm_cda <- readRDS(file.path(modeldir, paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_glm_cda.Rds")))
   rf_cda <- readRDS(file.path(modeldir, paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_rf_cda.Rds")))
-  # brt_cda <- readRDS(file.path(modeldir, paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_brt_cda.Rds")))
+  # rf_cda_lat <- readRDS(file.path(modeldir, paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_rf_cda_lat.Rds")))
+  brt_cda <- readRDS(file.path(modeldir, paste0(tolower(gsub(" ", "_", spp_do[i])), "_model_brt_cda.Rds")))
   
   # Merge into list
-  model_list <- list(glm_cda, rf_cda)
+  model_list <- list(glm_cda, rf_cda,  brt_cda)
   #  model_list <- list(glm_cda, rf_cda, brt_cda)
   
   # Evaluate models

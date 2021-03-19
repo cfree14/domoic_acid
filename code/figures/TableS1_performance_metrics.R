@@ -10,9 +10,9 @@ rm(list = ls())
 library(tidyverse)
 
 # Directories
-datadir <- "models/contamination/paper/output"
-plotdir <- "models/contamination/paper/figures"
-tabledir <- "models/contamination/paper/tables"
+datadir <- "output/model_tests"
+plotdir <- "figures"
+tabledir <- "tables"
 
 
 # Build data
@@ -29,7 +29,9 @@ data <- purrr::map_df(spp_do, function(x) {
   # Read data
   infile <- paste0(tolower(gsub(" ", "_", x)), "_evaluation.Rds")
   sdata <- readRDS(file.path(datadir, infile))
-  stats <- sdata$pmetrics %>% 
+  
+  # Performance metrics
+  pmetrics <- sdata$pmetrics %>% 
     mutate(species=x) %>% 
     dplyr::select(species, everything())
   
@@ -45,11 +47,11 @@ data_out <- data %>%
   # Arrange columns
   dplyr::select(species, model_type, pred_type, auc, kappa, accuracy) %>% 
   # Format stats
-  mutate(auc=round(auc, digits=2), 
-         kappa=round(kappa, digits=2), 
-         accuracy=round(accuracy, digits=2)) %>% 
+  mutate(dist=sqrt(auc^2+kappa^2)) %>% 
   # Arrange
-  arrange(species, desc(auc))
+  arrange(species, desc(dist)) %>% 
+  # Remove predictor
+  select(-pred_type)
 
 
 # Export table
