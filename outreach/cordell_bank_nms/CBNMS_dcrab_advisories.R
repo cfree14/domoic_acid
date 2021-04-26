@@ -40,6 +40,7 @@ advisories <- advisories %>%
 # Sample
 advisories_sample <- sample_frac(advisories, size=0.1)
 
+
 # Format closures
 ################################
 

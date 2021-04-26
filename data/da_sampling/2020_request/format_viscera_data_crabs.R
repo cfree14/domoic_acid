@@ -27,8 +27,8 @@ lobster1819_orig <- read_excel(file.path(inputdir, "Free Request 05-19-2020 2015
 lobster1920_orig <- read_excel(file.path(inputdir, "Free Request 05-19-2020 2015-2020 DA.xlsx"), sheet=8)
 
 # Read block centroids
-blocks <- read.csv(file.path(blockdir, "CA_commercial_fishing_blocks.csv"))
-
+blocks <- wcfish::blocks %>% 
+  sf::st_drop_geometry()
 
 # Format individual files
 ################################################################################
@@ -118,6 +118,7 @@ lobster1920 <- lobster1920_orig %>%
          da_ppm="result (ppm)") 
 colnames(lobster1819) 
 
+
 # Merge and format files
 ################################################################################
 
@@ -161,13 +162,13 @@ data <- data_merged_nodups %>%
                           "Lobster"="Spiny lobster",
                           "Lobster (f)"="Spiny lobster",
                           "Lobster (m)"="Spiny lobster",
-                          "Spiny lobsters"="Spiny lobster")) %>% 
+                          "Spiny lobsters"="Spiny lobster",
+                          "Spider crab"="Sheep crab")) %>% # likely sheep crab as per Duy Truong June 27, 2019 email and my experience
   # Add species name
   mutate(species=recode(comm_name,
                         "Dungeness crab"="Metacarcinus magister",
                         "Rock crab"="Cancer spp.", # Cancer productus, Cancer anthonyi, Cancer antennarius
                         "Sheep crab"="Loxorhynchus grandis",
-                        "Spider crab"="unknown", # this might be Sheep crab as per Duy Truong June 27, 2019 email
                         "Spiny lobster"="Panulirus interruptus")) %>%  # California spiny lobster
   # Format DA ppm
   mutate(da_ppm_prefix=ifelse(grepl("<|ND|nd", da_ppm), "<", ""), 
