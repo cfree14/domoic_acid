@@ -29,7 +29,7 @@ outputdir <- "data/charm/processed"
 
 # Look up datasets in CeNCOOS THREDDS server
 cencoos <- "http://thredds.cencoos.org/thredds/catalog.html"
-datasets <- tds_list_datasets(thredds_url = cencoos)
+datasets <- thredds::tds_list_datasets(thredds_url = cencoos)
 
 # Download CHARM nowcast NetCDFs
 # Datasets: HAB Pseudo Nitzschia Nowcast, HAB Cellular Domoic Acid Nowcast, HAB Particulate Domoic Acid Nowcast
@@ -88,7 +88,7 @@ download_charm_nowcasts <- function(dataset){
   if(dataset=="HAB Pseudo Nitzschia Nowcast"){outfile_name <- "CHARM_THREDDS_PN_20140305_to_20190507.grd"}
   if(dataset=="HAB Cellular Domoic Acid Nowcast"){outfile_name <- "CHARM_THREDDS_DAC_20140305_to_20190507.grd"}
   if(dataset=="HAB Particulate Domoic Acid Nowcast"){outfile_name <- "CHARM_THREDDS_DAP_20140305_to_20190507.grd"}
-  writeRaster(charm_brick_rotated, file=file.path(outputdir, outfile_name))
+  writeRaster(charm_brick_rotated, file=file.path(outputdir, outfile_name), overwrite=T)
     
 }
 
@@ -130,7 +130,7 @@ charmInfo <- rerddap::info('charmForecast0day', url = "https://coastwatch.pfeg.n
 
 # Download C-HARM datasets
 charmData <- rerddap::griddap(x=charmInfo, fields=c("pseudo_nitzschia", "particulate_domoic", "cellular_domoic"), 
-                               time=c("2018-06-19", "last"),
+                               time=c("2018-06-19", "2021-08-23"),
                                url="https://coastwatch.pfeg.noaa.gov/erddap/", fmt="nc") 
 
 # Inspect data
