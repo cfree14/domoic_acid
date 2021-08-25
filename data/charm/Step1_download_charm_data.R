@@ -40,22 +40,22 @@ download_charm_nowcasts <- function(dataset){
   url <- datasets$path[datasets$dataset==dataset]
   
   # Available services
-  services <- tds_list_services(url)
+  services <- thredds::tds_list_services(url)
   
   # NetCDF URL
   ncdf_url <- services$path[services$service=="NetcdfSubset"]
-  ncdf_vars <- tds_ncss_list_vars(ncss_url = ncdf_url)
+  ncdf_vars <- thredds::tds_ncss_list_vars(ncss_url = ncdf_url)
   
   # Download NetCDF
   if(dataset=="HAB Pseudo Nitzschia Nowcast"){outfile_name <- "CHARM_THREDDS_PN_20140305_to_20190507.nc"}
   if(dataset=="HAB Cellular Domoic Acid Nowcast"){outfile_name <- "CHARM_THREDDS_DAC_20140305_to_20190507.nc"}
   if(dataset=="HAB Particulate Domoic Acid Nowcast"){outfile_name <- "CHARM_THREDDS_DAP_20140305_to_20190507.nc"}
-  ncdf <- tds_ncss_download(ncss_url = ncdf_url,
-                            out_file = file.path(inputdir, outfile_name),
-                            var=ncdf_vars$name,
-                            bbox = NULL, # download all grid cells
-                            ncss_args=list(temporal = "all", accept="netcdf4", addLatLon="true"), # download all dates
-                            overwrite=T)
+  ncdf <- thredds::tds_ncss_download(ncss_url = ncdf_url,
+                                      out_file = file.path(inputdir, outfile_name),
+                                      var=ncdf_vars$name,
+                                      bbox = NULL, # download all grid cells
+                                      ncss_args=list(temporal = "all", accept="netcdf4", addLatLon="true"), # download all dates
+                                      overwrite=T)
   
   # Read NetCDF as raster brick
   # charm_ncdf <- nc_open(file.path(inputdir, outfile_name)) # deprecated - don't use this
