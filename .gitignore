@@ -16,3 +16,4 @@ data/charm/processed/charm_pn_nowcast_dataframe.Rds
 
 # Large data
 output/model_preds
+data/bathymetry/raw
